@@ -1,4 +1,4 @@
-//CWRUbotix MATE ROV FLOAT 2022 (Toby Cowles)
+//CWRUbotix MATE ROV FLOAT 2022 (Toby Cowles and Nathan Hsiao)
 int debug = 1; //1 enables serial debugging
 int wait = 1000; // time to sink/surface 
 int timeout = 1000; //run time before assumed limit switch problem
