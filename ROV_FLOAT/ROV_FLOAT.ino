@@ -1,7 +1,8 @@
 //CWRUbotix MATE ROV FLOAT 2022 (Toby Cowles and Nathan Hsiao)
 int debug = 1; //1 enables serial debugging
-int wait = 1000; // time to sink/surface 
-int timeout = 1000; //run time before assumed limit switch problem
+int wait = 10000; // time to sink/surface 
+int timeout = 10000000; //run time before assumed limit switch problem
+int sink = 1;
 
 unsigned long GlobalMillis = 0;
 
@@ -46,7 +47,7 @@ void Stop(){
 }
 
 void loop() {
-  int sink = 1;
+  //int sink = 1;
 if (digitalRead(8) == HIGH){
   unsigned long Millis = millis();
   if(debug == 1){
@@ -54,7 +55,7 @@ if (digitalRead(8) == HIGH){
   }
   if (sink == 1) {
     Sink();
-  if(digitalRead(9) == LOW || (Millis - GlobalMillis) >= timeout){
+  if(digitalRead(9) == LOW){
     Stop();
     delay(wait);
     sink = 0; 
@@ -62,7 +63,7 @@ if (digitalRead(8) == HIGH){
   }
   if (sink == 0){
     Surface();
-    if(digitalRead(10) == LOW || (Millis - GlobalMillis) >= timeout){
+    if(digitalRead(10) == LOW){
     Stop();
     delay(wait);
     sink = 1; 
@@ -72,6 +73,11 @@ if (digitalRead(8) == HIGH){
   
   
 }
-  
+
+else{
+  if (debug == 1){
+  Serial.println("connected to ROV");}
+}
 
 }
+  
